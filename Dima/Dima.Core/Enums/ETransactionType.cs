@@ -1,6 +1,6 @@
 namespace Dima.Core.Enums;
 
-public class ETransactionType
+public enum ETransactionType
 {
     Deposit = 1,
     Withdraw = 2
