@@ -32,12 +32,73 @@ app.UseSwaggerUI();
 
 
 app.MapPost("/v1/categories",
-        (
+        async (
             CreateCategoryRequest request,
             ICategoryHandler handler)
-            => handler.CreateAsync(request))
+            => await handler.CreateAsync(request))
     .WithName("Categories: Create")
     .WithSummary("Cria uma nova categoria")
-    .Produces<Response<Category>>();
+    .WithDescription("Cria uma nova categoria")
+    .Produces<Response<Category?>>();
+
+app.MapPut("/v1/categories/{id}",
+        async (long id,
+            UpdateCategoryRequest request,
+            ICategoryHandler handler)
+            => await handler.UpdateAsync(request))
+    .WithName("Categories: Update")
+    .WithSummary("Atualiza categoria")
+    .Produces<Response<Category?>>();
+
+app.MapDelete("/v1/categories/{id}",
+        async (long id,
+            ICategoryHandler handler)
+            =>
+        {
+            var request = new DeleteCategoryResquest
+            {
+                Id = id,
+                UserId = "teste@teste"
+
+            };
+            return await handler.DeleteAsync(request);
+
+        })
+    .WithName("Categories: Delete")
+    .WithSummary("Remove categoria")
+    .Produces<Response<Category?>>();
+
+app.MapGet("/v1/categories/{id}",
+        async (long id,
+            ICategoryHandler handler)
+            =>
+        {
+            var request = new GetCategoryByIdRequest
+            {
+                Id = id,
+                UserId = "teste@teste"
+
+            };
+            return await handler.GetByIdAsync(request);
+
+        })
+    .WithName("Categories: GetById")
+    .WithSummary("Pesquisa uma categoria")
+    .Produces<Response<Category?>>();
+
+app.MapGet("/v1/categories",
+        async (
+            ICategoryHandler handler)
+            =>
+        {
+            var request = new GetAllCategoriesRequest
+            {
+                UserId = "test@balta.io"
+            };
+            return await handler.GetAllAsync(request);
+        })
+    .WithName("Categories: GetAll")
+    .WithSummary("Lista categorias")
+    .Produces<PagedResponse<List<Category?>>>();
 
 app.Run();

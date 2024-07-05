@@ -5,5 +5,5 @@ public class Category
     public long Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public string UseID { get; set; } = string.Empty;
+    public string UseId { get; set; } = string.Empty;
 }

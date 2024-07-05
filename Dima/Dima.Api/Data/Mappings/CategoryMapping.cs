@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Dima.Api.Data.Mappings;
 
-public class CategoryMapping:IEntityTypeConfiguration<Category>
+public class CategoryMapping : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
@@ -14,13 +14,13 @@ public class CategoryMapping:IEntityTypeConfiguration<Category>
             .IsRequired(true)
             .HasColumnType("NVARCHAR")
             .HasMaxLength(80);
-            
+
         builder.Property(t => t.Description)
             .IsRequired(false)
             .HasColumnType("NVARCHAR")
             .HasMaxLength(255);
-        
-        builder.Property(t => t.UseID)
+
+        builder.Property(t => t.UseId)
             .IsRequired(false)
             .HasColumnType("NVARCHAR")
             .HasMaxLength(160);
