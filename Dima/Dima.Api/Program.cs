@@ -26,6 +26,8 @@ builder.Services.AddSwaggerGen(options =>
 //injeção de dependência
 builder.Services.AddTransient<ICategoryHandler, CategoryHandler>();
 
+builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();
+
 var app = builder.Build();
 
 app.UseSwagger();

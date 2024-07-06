@@ -18,7 +18,6 @@ public class CreateCategoryEndpoint : IEndpoint
             .Produces<Response<Category?>>();
 
     private static async Task<IResult> HandleAsync(
-        ClaimsPrincipal user,
         ICategoryHandler handler,
         CreateCategoryRequest request)
     {
